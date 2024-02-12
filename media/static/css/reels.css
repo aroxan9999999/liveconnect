@@ -15,7 +15,7 @@
      height: 0;
  }
 
- 
+
  body {
      scroll-behavior: center;
  }
@@ -130,8 +130,7 @@
      transform: scale(1.2);
  }
 
- .reels_icon ul li p,
- span {
+ .reels_icon ul li p, .reels_icon ul li span {
      font-weight: normal;
      letter-spacing: normal;
      color: rgb(21, 7, 34);
@@ -314,27 +313,26 @@
  }
 
  #emojiPanel {
-     position: absolute;
-     top: 79%;
-     ;
-     left: 0;
-     width: 450px;
-     height: 100px;
-     overflow-y: scroll;
-     display: flex;
-     flex-wrap: wrap;
-     border: 1px solid #ccc;
-     padding: 5px;
-     background: white;
-     border-radius: 5px;
-     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-     z-index: 1000;
-     opacity: 0.7;
+    position: absolute;
+    top: 79%;;
+    left: 0;
+    width: 450px;
+    height: 100px;
+    overflow-y: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid #ccc;
+    padding: 5px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    opacity: 0.7;
  }
 
  #emojiPanel::-webkit-scrollbar {
-     display: none;
- }
+    display: none;
+}
 
  .emojiPanel span {
      font-size: 24px;
@@ -348,21 +346,7 @@
      transition: opacity 0.2s;
  }
 
-
- .c_window {
-     overflow-y: auto;
- }
-
- .menu_create .preview::-webkit-scrollbar {
-     display: none;
- }
-
- .c_window::-webkit-scrollbar {
-     display: none;
- }
-
-
- .c_window .chat-container {
+ #c_window .chat-container {
      display: flex;
      flex-direction: column;
      padding: 10px;

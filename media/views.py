@@ -67,8 +67,8 @@ class MediaListView(ListView, View):
                 'title': media.title,
                 'description': media.description,
                 'files': files_urls,
-                'created_at': media.created_at.strftime('%Y-%m-%d %H:%M:%S').isoformat(),
-                'updated_at': media.updated_at.strftime('%Y-%m-%d %H:%M:%S').isoformat(),
+                'created_at': media.created_at.isoformat(),
+                'updated_at': media.updated_at.isoformat(),
                 'hearts_count': new_data['count'],
                 'src': new_data['src'],
             })
