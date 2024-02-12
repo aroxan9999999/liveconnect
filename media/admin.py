@@ -1,6 +1,6 @@
 from django.utils.html import format_html
 from django.contrib import admin
-from .models import Media, Comment, File  # Убедитесь, что импортировали модель File
+from .models import Media, Comment, File
 
 
 @admin.register(Media)
@@ -18,7 +18,7 @@ class MediaAdmin(admin.ModelAdmin):
     def files_list(self, obj):
         files = obj.files.all()
         images = [file for file in files if
-                  not file.file.name.lower().endswith(('.mp4', '.avi', '.wmv'))]  # Проверка, что файл не видео
+                  not file.file.name.lower().endswith(('.mp4', '.avi', '.wmv'))]
         return format_html(
             ''.join([f'<img src="{image.file.url}" style="height: 50px; display: block;" />' for image in images]))
 
@@ -27,10 +27,10 @@ class MediaAdmin(admin.ModelAdmin):
     def thumbnail(self, obj):
         files = obj.files.all()
         images = [file for file in files if
-                  not file.file.name.lower().endswith(('.mp4', '.avi', '.wmv'))]  # Проверка, что файл не видео
+                  not file.file.name.lower().endswith(('.mp4', '.avi', '.wmv'))]
         if images:
             return format_html('<img src="{}" style="height: 50px;"/>',
-                               images[0].file.url)  # Возвращаем только первое изображение
+                               images[0].file.url)
         return "-"
 
     thumbnail.short_description = 'Thumbnail'
