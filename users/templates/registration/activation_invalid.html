@@ -1,0 +1,19 @@
+{% extends "register_base.html" %}
+{% block head %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/activation_failed.css' %}">
+{% endblock %}
+
+{% block title %} Активация не удалась {% endblock %}
+
+{% block content %}
+<div class="activation-message">
+    {% if message %}
+        <h1>Активация аккаунта</h1>
+        <p>{{ message }}  <a href="{% url 'resend_activation_email' %}" class="activation_link">отправить запрос</a></p>
+    {% else %}
+        <h1>Ошибка активации</h1>
+        <p>К сожалению, мы не смогли активировать ваш аккаунт. Пожалуйста, убедитесь, что вы использовали правильную ссылку или попробуйте <a href="{% url 'resend_activation_email' %}" class="activation_link">отправить запрос</a> на активацию еще раз.</p>
+    {% endif %}
+</div>
+{% endblock %}

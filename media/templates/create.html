@@ -1,0 +1,22 @@
+<div class="menu_create" style="display: none;">
+    <span class="close_menu" onclick="closeMenu()">x</span>
+    <div class="menu_window">
+        <form class="form-media" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" id="title" name="title" maxlength="255" placeholder="Select Your Media Name:" required><br>
+            <textarea id="description" name="description" placeholder="Description" required></textarea><br>
+            <button id="submit-files-button" type="submit">Create post</button><br>
+            <label for="files" class="file-button">
+                <input class='media-file' type="file" id="files" name="files" multiple required>
+            </label>
+        </form>
+        <br>
+        <h1>Reels</h1>
+        <form id="reelForm" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" id="title" name="title" placeholder="elect Reels Name" required><br>
+            <button type="submit">Create Reel</button><br>
+            <input type="file" id="file" name="file" required><br>
+        </form>
+    </div>
+</div>

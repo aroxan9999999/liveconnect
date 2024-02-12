@@ -1,0 +1,28 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #6dd5ed, #ff758c);
+    color: #333;
+    text-align: center;
+    padding-top: 50px;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.activation-message {
+    margin: 20px auto;
+    width: 400px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.6;
+}

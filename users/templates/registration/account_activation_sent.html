@@ -1,0 +1,20 @@
+{% extends "register_base.html" %}
+{% block head %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/activation.css' %}">
+{% endblock %}
+
+{% block title %} Активация {% endblock %}
+
+{% block content %}
+<div class="activation-message">
+    {% if message %}
+        <h1>Активация аккаунта</h1>
+        <p>{{ message }}</p>
+    {% else %}
+        <h1>Активация аккаунта</h1>
+        <p>На вашу электронную почту было отправлено письмо со ссылкой для активации вашего аккаунта.</p>
+        <p>Пожалуйста, проверьте вашу почту и следуйте инструкциям в письме, чтобы завершить регистрацию.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .email-container {
+            font-family: Arial, sans-serif;
+            color: #333333;
+            line-height: 1.6;
+        }
+        .email-header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        .email-body {
+            padding: 20px;
+        }
+        .email-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="email-header">
+            <h2>Подтверждение Регистрации</h2>
+        </div>
+        <div class="email-body">
+            <p>Спасибо за регистрацию на нашем сайте. Пожалуйста, активируйте ваш аккаунт, нажав на кнопку ниже.</p>
+            <a href="{{activate_url}}" class="email-button">Активировать Аккаунт</a>
+        </div>
+    </div>
+</body>
+</html>

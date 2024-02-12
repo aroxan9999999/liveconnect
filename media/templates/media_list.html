@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block title %}liveconnect{% endblock  %}
+{% load static %}
+{% block extracss %}<link rel="stylesheet" type="text/css"  href="{% static 'css/media.css' %}">{% endblock  %}
+{% load my_custom_filters %}
+{% block content %}
+    <main>
+        <div class="menu">
+            <ul>
+                <li><a href="{% url 'first_rells' %}"><img src="{% static 'icons/reels.svg' %}" alt=""></a></li>
+                <li onclick="toggleMenu()"><img src="{% static 'icons/a_create.svg' %}" alt=""></li>
+                <li> <img src="{% static 'icons/settings.svg' %}" alt=""></li>
+                <li> <img src="{% static 'icons/profile.svg' %}" alt=""></li>
+            </ul>
+            {% include "create.html" %}
+        </div>
+        <div class="posts">
+            {% for media in media_list %}
+            <div class="post_main">
+                <div class="emojiPanel" id="emojiPanel_{{ media.pk }}" style="display:none;">
+                <span onclick="insertEmoji('😀' , {{  media.pk }} )">😀</span>
+                <span onclick="insertEmoji('😂' , {{  media.pk }} )">😂</span>
+                <span onclick="insertEmoji('👍' , {{  media.pk }} )">👍</span>
+                <span onclick="insertEmoji('😍' , {{  media.pk }} )">😍</span>
+                <span onclick="insertEmoji('😘' , {{  media.pk }} )">😘</span>
+                <span onclick="insertEmoji('😻' , {{  media.pk }} )">😻</span>
+                <span onclick="insertEmoji('💖' , {{  media.pk }} )">💖</span>
+                <span onclick="insertEmoji('💕' , {{  media.pk }} )">💕</span>
+                <span onclick="insertEmoji('💞' , {{  media.pk }} )">💞</span>
+                <span onclick="insertEmoji('💘' , {{  media.pk }} )">💘</span>
+                <span onclick="insertEmoji('💔' , {{  media.pk }} )">💔</span>
+                <span onclick="insertEmoji('❤️', {{  media.pk }} )">❤️</span>
+                <span onclick="insertEmoji('🧡', {{  media.pk }} )">🧡</span>
+                <span onclick="insertEmoji('💛', {{  media.pk }} )">💛</span>
+                <span onclick="insertEmoji('💚', {{  media.pk }} )">💚</span>
+                <span onclick="insertEmoji('💙', {{  media.pk }} )">💙</span>
+                <span onclick="insertEmoji('💜', {{  media.pk }} )">💜</span>
+                <span onclick="insertEmoji('🖤', {{  media.pk }} )">🖤</span>
+                <span onclick="insertEmoji('🤍', {{  media.pk }} )">🤍</span>
+                <span onclick="insertEmoji('🤎', {{  media.pk }} )">🤎</span>
+                    <span onclick="insertEmoji('🎉', {{  media.pk }} )">🎉</span>
+                <span onclick="insertEmoji('😎', {{  media.pk }} )">😎</span>
+                <span onclick="insertEmoji('👏', {{  media.pk }} )">👏</span>
+                <span onclick="insertEmoji('🤖', {{  media.pk }} )">🤖</span>
+                <span onclick="insertEmoji('🚀'), {{  media.pk }} )">🚀</span>
+                <span onclick="insertEmoji('🌟', {{  media.pk }} )">🌟</span>
+            </div>
+                <div class="post">
+                    <img class="left_next" src="{% static 'icons/left.svg' %}" alt="Previous"  onclick="changeImage({{ media.pk }}, -1)">
+                  <img class="right_next" src="{% static 'icons/right.svg' %}" alt="Next"  onclick="changeImage({{ media.pk }}, 1)">
+                    <div class="media_container">
+                      <div id="media-{{ media.pk }}" data-media-list-urls="{{ media_files_urls|get_by_index:forloop.counter0 }}" class="media">
+                      </div>
+                        </div>
+                    <div class="post_icons">
+                        <div class="lowe_section">
+                            <img data-object-id='"heart-media_{{ media.pk }}'  data-user-id='{{ request.user.pk }}' id="heart-media_{{ media.pk }}" class="love" src="{% static src %}" alt="">
+                            <span class="love_number">{{ hearts_count }}</span>
+                        </div>
+                        <div class="comment_section">
+                            <img onclick="hide_scrollMaxBottom('{{ media.pk }}')" class="chat_icon" src="{% static 'icons/comment.svg' %}" alt="">
+                            <span id="count_comments_by_{{ media.pk }}">{{ media.media_comment_count }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="comment win" style="display:none">
+                    <div class="c_window c_window_{{ media.pk }}">
+                        {% for comment in media.comments.all %}
+                        <div class="user">
+                            <div class="user_info">
+                                <div class="user_icon_wrap"><div style="background-image: url('{{ comment.user.picture.url }}');" class="user_icon"></div></div>
+                                <div class="message_info">
+                                    <span class="user_name">{{ comment.user.username }}</span>
+                                    <small class="time">{{ comment.created_at }}</small>
+                                </div>
+                            </div>
+                             <p class="user_text">{{ comment.text }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                        <div class="messages_send_{{ media.pk }} messages_send">
+                            <img class="smile" src="{% static 'icons/smile.svg' %}" alt="Смайлик" onclick="openEmojiPanel({{ media.pk }})" style="cursor: pointer;">
+                            <input type="text" id="messageInput_{{ media.pk }}" placeholder="Введите сообщение">
+                            <img class="send_btn" src="{% static 'icons/send.svg' %}" data-media-pk='{{  media.pk }}' alt="Отправить" onclick="sendMessage()" style="cursor: pointer;">
+                        </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+{% endblock %}
+{% block extrajs %}
+    <script src="{% static 'js/media.js' %}"></script>
+    <script src="{% static 'js/universal.js' %}"></script>
+    <script src="{% static 'js/media_chat.js' %}"></script>
+    <script src="{% static 'js/channels.js' %}"></script>
+{% endblock  %}
+

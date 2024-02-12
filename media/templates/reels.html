@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% block title %} {{reels_title}} {% endblock %}
+{% load static %}
+{% block extracss %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/reels.css' %}">{% endblock %}
+{% block content %}
+{{ reels_id|json_script:"room-name" }}
+<div class="container">
+    <div class="reels">
+        <div class="reels_content">
+            <video id="customVideoPlayer" style="width:100%;" preload="auto" loop autoplay aria-autocomplete="both">
+                <source src="{{ reels_content }}" type="video/mp4">
+                Ваш браузер не поддерживает элемент video.
+            </video>
+            <div id="customControls">
+                <input type="range" id="videoSlider" value="0" min="0" step="any"
+                    style="width: 80%; display: block; margin: 10px auto;">
+            </div>
+        </div>
+    </div>
+    <div class="icon_wraper">
+        <div class="reels_icon">
+            <ul>
+                <li class="love_s"><img class="love" data-object-id='heart-reels_{{ reels_id }}'  data-user-id='{{ request.user.pk }}' id="heart-reels_{{ reels_id }}"
+                       src="{% static src %}"
+                        alt="">
+                    <span class="love_count  love_number">
+                     {{ count }}
+                    </span>
+                </li>
+                <li  onclick="change('comment_wraper')" class="chat"><img  src="{% static 'icons/comment.svg' %}" alt="">
+                    <p class="comments_count">
+                       {{ comments.count }}
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div style='display:none' id='comment_wraper' class="comment_wraper">
+
+        <div id='comment' class="comment">
+            <div id="c_window_wraper" class="c_window_wraper">
+                                                                <!-- Сообщения будут добавляться здесь -->
+                    <div class="emojiPanel" id="emojiPanel" style="display:none;">
+                        <span onclick="insertEmoji('😀')">😀</span>
+                        <span onclick="insertEmoji('😂')">😂</span>
+                        <span onclick="insertEmoji('👍')">👍</span>
+                        <span onclick="insertEmoji('😍')">😍</span>
+                        <span onclick="insertEmoji('😘')">😘</span>
+                        <span onclick="insertEmoji('😻')">😻</span>
+                        <span onclick="insertEmoji('💖')">💖</span>
+                        <span onclick="insertEmoji('💕')">💕</span>
+                        <span onclick="insertEmoji('💞')">💞</span>
+                        <span onclick="insertEmoji('💘')">💘</span>
+                        <span onclick="insertEmoji('💔')">💔</span>
+                        <span onclick="insertEmoji('❤️')">❤️</span>
+                        <span onclick="insertEmoji('🧡')">🧡</span>
+                        <span onclick="insertEmoji('💛')">💛</span>
+                        <span onclick="insertEmoji('💚')">💚</span>
+                        <span onclick="insertEmoji('💙')">💙</span>
+                        <span onclick="insertEmoji('💜')">💜</span>
+                        <span onclick="insertEmoji('🖤')">🖤</span>
+                        <span onclick="insertEmoji('🤍')">🤍</span>
+                        <span onclick="insertEmoji('🤎')">🤎</span>
+                        <span onclick="insertEmoji('🎉')">🎉</span>
+                        <span onclick="insertEmoji('😎')">😎</span>
+                        <span onclick="insertEmoji('👏')">👏</span>
+                        <span onclick="insertEmoji('🤖')">🤖</span>
+                        <span onclick="insertEmoji('🚀')">🚀</span>
+                        <span onclick="insertEmoji('🌟')">🌟</span>
+                    </div>
+                <div class="c_window">
+                    <div class="chat-container">
+                        {% for message in comments %}
+                        <div class="message received">
+                            <img src="{{ message.user.picture.url }}" alt="User" class="avatar">
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <span class="username"> {{ message.user.username }} </span>
+                                    <span class="timestamp">{{ message.created_at }}</span>
+                                </div>
+                                <p class="message-text">{{ message.text }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="c_input">
+                    <ul class="c_input_elements">
+                        <li class="smile"><img onclick="change('emojiPanel')" src="{% static 'icons/smile.svg' %}"
+                                alt="">
+                        </li>
+                        <li class="input"><input id="message_input" type="text"></li>
+                        <li class="send_messages"><img id='chat-message-submit' src="{% static 'icons/send.svg' %}" alt=""></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block extrajs %}
+<script src="{% static 'js/reels.js' %}"></script>
+<script src="{% static 'js/universal.js' %}"></script>
+<script src="{% static 'js/reels_chat.js' %}"></script>
+<script src="{% static 'js/channels.js' %}"></script>
+<script type="text/javascript">
+    const previous_reel_url = '{{ previous_reel_url }}';
+    const next_reel_url = '{{ next_reel_url }}';
+</script>
+{% endblock %}
